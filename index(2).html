@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galácticas Pulseras</title>
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #fff;
+      background: #0d0638;
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 14px;
+      background: rgba(8, 3, 35, .92);
+      border-bottom: 1px solid #7652ff;
+      backdrop-filter: blur(8px);
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      padding: 9px 16px;
+      border: 1px solid #7652ff;
+      border-radius: 999px;
+      font-size: 14px;
+    }
+    nav a:hover { background: #7652ff; }
+
+    .hero {
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 20px;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 20% 25%, rgba(105, 61, 255, .35), transparent 22%),
+        radial-gradient(circle at 80% 35%, rgba(0, 145, 255, .22), transparent 20%),
+        linear-gradient(145deg, #100448, #16005d 55%, #080323);
+    }
+    .hero::before {
+      content: "✦   ·      ✧       ·   ✦     ·       ✧    ·     ✦";
+      position: absolute;
+      inset: 20% 5%;
+      color: #fff;
+      opacity: .7;
+      font-size: 18px;
+      line-height: 4;
+      word-spacing: 28px;
+      pointer-events: none;
+    }
+    .hero-content { position: relative; max-width: 850px; }
+    .mini { letter-spacing: 4px; font-size: 12px; font-weight: bold; }
+    h1 {
+      margin: 18px 0 8px;
+      font-family: Georgia, serif;
+      font-size: clamp(52px, 9vw, 105px);
+      color: #a894ff;
+      text-shadow: 0 0 25px rgba(143, 110, 255, .35);
+    }
+    .tagline {
+      font-size: clamp(18px, 3vw, 25px);
+      font-weight: bold;
+      line-height: 1.35;
+    }
+    .buttons { margin-top: 34px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-block;
+      padding: 13px 24px;
+      border-radius: 9px;
+      border: 1px solid #8d70ff;
+      color: white;
+      text-decoration: none;
+      background: #16095b;
+      cursor: pointer;
+    }
+    .btn:hover { background: #7652ff; }
+
+    section { padding: 75px 7%; }
+    .section-title {
+      text-align: center;
+      font-family: Georgia, serif;
+      font-size: clamp(34px, 5vw, 52px);
+      margin: 0 0 12px;
+      color: #b6a6ff;
+    }
+    .section-subtitle { text-align: center; color: #ddd8ff; margin: 0 auto 38px; max-width: 650px; }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 24px;
+      max-width: 1150px;
+      margin: auto;
+    }
+    .card {
+      background: rgba(30, 17, 91, .75);
+      border: 1px solid #5c43ca;
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: 0 12px 35px rgba(0,0,0,.2);
+    }
+    .product-photo {
+      height: 230px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      background: linear-gradient(145deg, #27206c, #12083f);
+      color: #bdb3ff;
+      border: 1px dashed #7652ff;
+      overflow: hidden;
+    }
+    .product-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .card h3 { margin: 16px 0 6px; }
+    .price { color: #fff; font-size: 20px; font-weight: bold; }
+    .details { color: #d5d0ef; font-size: 14px; line-height: 1.5; min-height: 42px; }
+    .card .btn { width: 100%; text-align: center; margin-top: 10px; }
+
+    .about, .how {
+      max-width: 900px;
+      margin: auto;
+      background: rgba(30, 17, 91, .55);
+      border: 1px solid #4e37ad;
+      border-radius: 22px;
+      padding: 35px;
+      line-height: 1.7;
+    }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 18px;
+      margin-top: 25px;
+    }
+    .step {
+      padding: 20px;
+      border-radius: 15px;
+      background: #170a52;
+      border: 1px solid #4e37ad;
+    }
+    .step strong { color: #b6a6ff; }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      border-top: 1px solid #4e37ad;
+      color: #c8c2e8;
+    }
+
+    @media (max-width: 600px) {
+      section { padding: 55px 18px; }
+      .product-photo { height: 260px; }
+      .about, .how { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#inicio">Inicio</a>
+  <a href="#pulseras">Pulseras</a>
+  <a href="#collares">Collares</a>
+  <a href="#llaveros">Llaveros</a>
+  <a href="#nosotras">Sobre nosotras</a>
+  <a href="#comprar">Cómo comprar</a>
+</nav>
+
+<header class="hero" id="inicio">
+  <div class="hero-content">
+    <div class="mini">BIJOUTERIE & ACCESORIOS</div>
+    <h1>Galácticas</h1>
+    <div class="tagline">PULSERAS<br>HECHAS A MANO 💜</div>
+    <div class="buttons">
+      <a class="btn" href="#pulseras">PULSERAS</a>
+      <a class="btn" href="#collares">COLLARES</a>
+      <a class="btn" href="#llaveros">LLAVEROS</a>
+    </div>
+  </div>
+</header>
+
+<section id="pulseras">
+  <h2 class="section-title">Pulseras ✨</h2>
+  <p class="section-subtitle">Encontrá tu combinación favorita 💜</p>
+  <div class="products">
+
+    <article class="card">
+      <div class="product-photo">📸<br>Foto Pulsera 01</div>
+      <h3>Pulsera 01</h3>
+      <p class="details">Descripción del producto.</p>
+      <div class="price">$____</div>
+      <a class="btn" href="#comprar">💌 PEDIR</a>
+    </article>
+    <article class="card">
+      <div class="product-photo">📸<br>Foto Pulsera 02</div>
+      <h3>Pulsera 02</h3>
+      <p class="details">Descripción del producto.</p>
+      <div class="price">$____</div>
+      <a class="btn" href="#comprar">💌 PEDIR</a>
+    </article>
+    <article class="card">
+      <div class="product-photo">📸<br>Foto Pulsera 03</div>
+      <h3>Pulsera 03</h3>
+      <p class="details">Descripción del producto.</p>
+      <div class="price">$____</div>
+      <a class="btn" href="#comprar">💌 PEDIR</a>
+    </article>
+    <article class="card">
+      <div class="product-photo">📸<br>Foto Pulsera 04</div>
+      <h3>Pulsera 04</h3>
+      <p class="details">Descripción del producto.</p>
+      <div class="price">$____</div>
+      <a class="btn" href="#comprar">💌 PEDIR</a>
+    </article>
+    <article class="card">
+      <div class="product-photo">📸<br>Foto Pulsera 05</div>
+      <h3>Pulsera 05</h3>
+      <p class="details">Descripción del producto.</p>
+      <div class="price">$____</div>
+      <a class="btn" href="#comprar">💌 PEDIR</a>
+    </article>
+    <article class="card">
+      <div class="product-photo">📸<br>Foto Pulsera 06</div>
+      <h3>Pulsera 06</h3>
+      <p class="details">Descripción del producto.</p>
+      <div class="price">$____</div>
+      <a class="btn" href="#comprar">💌 PEDIR</a>
+    </article>
+    <article class="card">
+      <div class="product-photo">📸<br>Foto Pulsera 07</div>
+      <h3>Pulsera 07</h3>
+      <p class="details">Descripción del producto.</p>
+      <div class="price">$____</div>
+      <a class="btn" href="#comprar">💌 PEDIR</a>
+    </article>
+    <article class="card">
+      <div class="product-photo">📸<br>Foto Pulsera 08</div>
+      <h3>Pulsera 08</h3>
+      <p class="details">Descripción del producto.</p>
+      <div class="price">$____</div>
+      <a class="btn" href="#comprar">💌 PEDIR</a>
+    </article>
+    <article class="card">
+      <div class="product-photo">📸<br>Foto Pulsera 09</div>
+      <h3>Pulsera 09</h3>
+      <p class="details">Descripción del producto.</p>
+      <div class="price">$____</div>
+      <a class="btn" href="#comprar">💌 PEDIR</a>
+    </article>
+    <article class="card">
+      <div class="product-photo">📸<br>Foto Pulsera 10</div>
+      <h3>Pulsera 10</h3>
+      <p class="details">Descripción del producto.</p>
+      <div class="price">$____</div>
+      <a class="btn" href="#comprar">💌 PEDIR</a>
+    </article>
+    <article class="card">
+      <div class="product-photo">📸<br>Foto Pulsera 11</div>
+      <h3>Pulsera 11</h3>
+      <p class="details">Descripción del producto.</p>
+      <div class="price">$____</div>
+      <a class="btn" href="#comprar">💌 PEDIR</a>
+    </article>
+    <article class="card">
+      <div class="product-photo">📸<br>Foto Pulsera 12</div>
+      <h3>Pulsera 12</h3>
+      <p class="details">Descripción del producto.</p>
+      <div class="price">$____</div>
+      <a class="btn" href="#comprar">💌 PEDIR</a>
+    </article>
+    <article class="card">
+      <div class="product-photo">📸<br>Foto Pulsera 13</div>
+      <h3>Pulsera 13</h3>
+      <p class="details">Descripción del producto.</p>
+      <div class="price">$____</div>
+      <a class="btn" href="#comprar">💌 PEDIR</a>
+    </article>
+    <article class="card">
+      <div class="product-photo">📸<br>Foto Pulsera 14</div>
+      <h3>Pulsera 14</h3>
+      <p class="details">Descripción del producto.</p>
+      <div class="price">$____</div>
+      <a class="btn" href="#comprar">💌 PEDIR</a>
+    </article>
+    <article class="card">
+      <div class="product-photo">📸<br>Foto Pulsera 15</div>
+      <h3>Pulsera 15</h3>
+      <p class="details">Descripción del producto.</p>
+      <div class="price">$____</div>
+      <a class="btn" href="#comprar">💌 PEDIR</a>
+    </article>
+    <article class="card">
+      <div class="product-photo">📸<br>Foto Pulsera 16</div>
+      <h3>Pulsera 16</h3>
+      <p class="details">Descripción del producto.</p>
+      <div class="price">$____</div>
+      <a class="btn" href="#comprar">💌 PEDIR</a>
+    </article>
+    <article class="card">
+      <div class="product-photo">📸<br>Foto Pulsera 17</div>
+      <h3>Pulsera 17</h3>
+      <p class="details">Descripción del producto.</p>
+      <div class="price">$____</div>
+      <a class="btn" href="#comprar">💌 PEDIR</a>
+    </article>
+    <article class="card">
+      <div class="product-photo">📸<br>Foto Pulsera 18</div>
+      <h3>Pulsera 18</h3>
+      <p class="details">Descripción del producto.</p>
+      <div class="price">$____</div>
+      <a class="btn" href="#comprar">💌 PEDIR</a>
+    </article>
+    <article class="card">
+      <div class="product-photo">📸<br>Foto Pulsera 19</div>
+      <h3>Pulsera 19</h3>
+      <p class="details">Descripción del producto.</p>
+      <div class="price">$____</div>
+      <a class="btn" href="#comprar">💌 PEDIR</a>
+    </article>
+    <article class="card">
+      <div class="product-photo">📸<br>Foto Pulsera 20</div>
+      <h3>Pulsera 20</h3>
+      <p class="details">Descripción del producto.</p>
+      <div class="price">$____</div>
+      <a class="btn" href="#comprar">💌 PEDIR</a>
+    </article>
+  </div>
+</section>
+
+<section id="collares">
+  <h2 class="section-title">Collares 💫</h2>
+  <p class="section-subtitle">Nuestros collares y diseños disponibles.</p>
+  <div class="products">
+    <article class="card">
+      <div class="product-photo">📸<br>Acá va la foto del collar</div>
+      <h3>Collar Galaxia</h3>
+      <p class="details">Descripción del producto.</p>
+      <div class="price">$____</div>
+      <a class="btn" href="#comprar">💌 PEDIR</a>
+    </article>
+  </div>
+</section>
+
+<section id="llaveros">
+  <h2 class="section-title">Llaveros ⭐</h2>
+  <p class="section-subtitle">Pequeños accesorios para llevar con vos.</p>
+  <div class="products">
+    <article class="card">
+      <div class="product-photo">📸<br>Acá va la foto del llavero</div>
+      <h3>Llavero Estelar</h3>
+      <p class="details">Descripción del producto.</p>
+      <div class="price">$____</div>
+      <a class="btn" href="#comprar">💌 PEDIR</a>
+    </article>
+  </div>
+</section>
+
+<section id="nosotras">
+  <h2 class="section-title">Sobre nosotras 💜</h2>
+  <div class="about">
+    <p><strong>Somos Galácticas Pulseras</strong>, una mini marca creada entre amigas con mucha creatividad y ganas de hacer accesorios únicos.</p>
+    <p>Armamos nuestros productos a mano y ponemos un poquito de nuestra personalidad en cada diseño. ✨</p>
+  </div>
+</section>
+
+<section id="comprar">
+  <h2 class="section-title">¿Cómo comprar? 🛍️</h2>
+  <div class="how">
+    <div class="steps">
+      <div class="step"><strong>01 — ELEGÍ</strong><br>Elegí el producto que más te guste.</div>
+      <div class="step"><strong>02 — ESCRIBINOS</strong><br>Mandanos un mensaje para hacer tu pedido.</div>
+      <div class="step"><strong>03 — CONFIRMÁ</strong><br>Confirmamos disponibilidad y precio.</div>
+      <div class="step"><strong>04 — RECIBÍ</strong><br>Coordinamos la entrega.</div>
+    </div>
+    <div class="buttons">
+      <a class="btn" href="https://wa.me/5491122533527" target="_blank">💌 WHATSAPP</a>
+    </div>
+    <p style="text-align:center; font-size:13px; color:#aaa4c9;">Este botón abre nuestro WhatsApp para hacer pedidos.</p>
+  </div>
+</section>
+
+<footer>
+  🌌 Galácticas Pulseras · Hecho a mano entre amigas 💜
+</footer>
+
+</body>
+</html>
